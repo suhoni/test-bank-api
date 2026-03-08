@@ -13,13 +13,13 @@ export class AccountsService {
 
     try {
       const users = await queryRunner.query(
-        `SELECT id FROM users WHERE id = $1`
+        `SELECT id FROM users WHERE id = $1`,
         [dto.userId]
       );
       if (!users.length) {
         throw new NotFoundException(`User with id ${dto.userId} not found.`);
       }
-      const result = queryRunner.query(
+      const result = await queryRunner.query(
         `INSERT INTO accounts (user_id) VALUES ($1) RETURNING *`,
         [dto.userId]
       );
