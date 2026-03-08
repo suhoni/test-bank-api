@@ -6,7 +6,7 @@ export class Init1772928509734 implements MigrationInterface {
     await queryRunner.query(`
         CREATE TABLE users
         (
-            id         uuid PRIMARY KEY,
+            id         SERIAL PRIMARY KEY,
             email      varchar NOT NULL UNIQUE,
             created_at timestamp DEFAULT now()
         )
@@ -15,8 +15,8 @@ export class Init1772928509734 implements MigrationInterface {
     await queryRunner.query(`
         CREATE TABLE accounts
         (
-            id         uuid PRIMARY KEY,
-            user_id    uuid NOT NULL,
+            id         SERIAL PRIMARY KEY,
+            user_id    SERIAL NOT NULL,
             balance    numeric(15, 2) DEFAULT 0,
             created_at timestamp      DEFAULT now(),
 
@@ -33,12 +33,12 @@ export class Init1772928509734 implements MigrationInterface {
     await queryRunner.query(`
         CREATE TABLE transactions
         (
-            id              uuid PRIMARY KEY,
+            id              SERIAL PRIMARY KEY,
             type            varchar        NOT NULL,
             amount          numeric(15, 2) NOT NULL,
 
-            from_account_id uuid,
-            to_account_id   uuid           NOT NULL,
+            from_account_id SERIAL,
+            to_account_id   SERIAL           NOT NULL,
 
             created_at      timestamp DEFAULT now(),
 
