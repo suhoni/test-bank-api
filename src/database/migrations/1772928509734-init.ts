@@ -16,7 +16,7 @@ export class Init1772928509734 implements MigrationInterface {
         CREATE TABLE accounts
         (
             id         SERIAL PRIMARY KEY,
-            user_id    SERIAL NOT NULL,
+            user_id    INT NOT NULL,
             balance    numeric(15, 2) DEFAULT 0,
             created_at timestamp      DEFAULT now(),
 
@@ -37,8 +37,8 @@ export class Init1772928509734 implements MigrationInterface {
             type            varchar        NOT NULL,
             amount          numeric(15, 2) NOT NULL,
 
-            from_account_id SERIAL,
-            to_account_id   SERIAL           NOT NULL,
+            from_account_id INT,
+            to_account_id   INT           NOT NULL,
 
             created_at      timestamp DEFAULT now(),
 
